@@ -1,0 +1,23 @@
+{% extends 'portfolio/base.html' %}
+{% block content %}
+
+
+Hellow blog
+
+<h1>My blog page</h1>
+
+<h2>I has written {{ blogs.count }} post{{ blogs.count|pluralize }}</h2>
+
+{% for blog in blogs %}
+    <a href="{% url 'blog:detail' blog.id %}"><h2>{{ blog.title }}<h2></a>
+
+    <h5>{{ blog.date|date:'M d Y' }}</h5>
+    <p>{{ blog.description|striptags|truncatechars:100 }}</p>
+    <img src="{{ blog.image.url }}">
+        {% if blog.url %}
+        <br><a href="{{ blog.url }}">Link</a>
+        {% endif %}
+
+{% endfor %}
+
+{% endblock %}
